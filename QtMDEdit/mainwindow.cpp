@@ -55,12 +55,14 @@ void MainWindow::plainTextChanged() {
 void MainWindow::on_action_Source_triggered()
 {
     m_htmlMode = false;
+    ui->action_HTML->setChecked(false);
     ui->textEdit->setPlainText(m_htmlText);
 }
 
 void MainWindow::on_action_HTML_triggered()
 {
     m_htmlMode = true;
+    ui->action_Source->setChecked(false);
     ui->textEdit->setHtml(m_htmlText);
 }
 

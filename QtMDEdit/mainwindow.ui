@@ -63,11 +63,20 @@
    <addaction name="action_HTML"/>
   </widget>
   <action name="action_Source">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>&amp;Source</string>
    </property>
   </action>
   <action name="action_HTML">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>&amp;HTML</string>
    </property>
