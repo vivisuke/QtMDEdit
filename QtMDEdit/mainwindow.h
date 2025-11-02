@@ -23,5 +23,6 @@ public slots:
 private:
     Ui::MainWindow *ui;
     QString	m_plainText;
+    QString	m_htmlText;
 };
 #endif // MAINWINDOW_H

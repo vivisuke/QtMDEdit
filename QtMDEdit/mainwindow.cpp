@@ -14,8 +14,21 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+QString toHtmlText(const QString& plainText) {
+    auto lst = plainText.split('\n');
+    QString txt;
+    for(int i = 0; i != lst.size(); ++i) {
+        const auto &line = lst[i];
+        if( !line.isEmpty() ) {
+            txt += "<p>" + line + "\n";
+        }
+    }
+    return txt;
+}
+
 void MainWindow::plainTextChanged() {
     qDebug() << "plainTextChanged()\n";
     m_plainText = ui->plainTextEdit->toPlainText();
-    ui->textEdit->setPlainText(m_plainText);
+    m_htmlText = toHtmlText(m_plainText);
+    ui->textEdit->setHtml(m_htmlText);
 }
