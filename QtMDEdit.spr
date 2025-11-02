@@ -5,7 +5,7 @@
 0003 ◎ C 11/02 11/02 0.001│ToDo│View/Source, HTML メニュー・ツールバー追加
 0004 ◎ C 11/02 11/02 0.001│ToDo│メインウィンドウタイトル：「QtMDEdit ver 0.001」
 0005 ◎ C 11/02 11/02 0.001│ToDo│TextEdit は編集不可（リードオンリー）に
-0006 ● C 11/02            │ToDo│
+0006 ◎ C 11/02 11/02 0.001│ToDo│PlainTextEdit 編集時：MainWindows にシグナル発行
 0007 ● C 11/02            │ToDo│
 0008 ● C 11/02            │ToDo│
 0009 ● C 11/02            │ToDo│

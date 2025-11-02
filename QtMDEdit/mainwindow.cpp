@@ -13,3 +13,9 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::plainTextChanged() {
+    qDebug() << "plainTextChanged()\n";
+    m_plainText = ui->plainTextEdit->toPlainText();
+    ui->textEdit->setPlainText(m_plainText);
+}

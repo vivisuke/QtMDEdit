@@ -17,7 +17,11 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+public slots:
+    void	plainTextChanged();
+
 private:
     Ui::MainWindow *ui;
+    QString	m_plainText;
 };
 #endif // MAINWINDOW_H
