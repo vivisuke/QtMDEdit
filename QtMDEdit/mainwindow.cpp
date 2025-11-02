@@ -18,7 +18,8 @@ QString toHtmlText(const QString& plainText) {
     auto lst = plainText.split('\n');
     QString txt;
     bool p_flag = true;
-    bool ul_flag = false;		//	<ul> ブロック内
+    //bool ul_flag = false;		//	<ul> ブロック内
+    int ul_level = 0;
     for(int i = 0; i != lst.size(); ++i) {
         auto line = lst[i];
         int nspc = 0;
@@ -26,9 +27,9 @@ QString toHtmlText(const QString& plainText) {
       	if( nspc != 0 ) line = line.mid(nspc);
         if( !line.isEmpty() ) {
         	if( line[0] == '#' ) {
-        		if( ul_flag ) {
+        		while( ul_level > 0) {
         			txt += "</ul>\n";
-        			ul_flag = false;
+        			--ul_level;
         		}
         		int i = 1;
         		while( i < line.size() && line[i] == '#' ) ++i;
@@ -38,15 +39,20 @@ QString toHtmlText(const QString& plainText) {
                 txt += QString("<h%1>").arg(h) + t + QString("</h%1>\n").arg(h);
 	        	p_flag = true;
         	} else if( line.left(2) == "- " ) {
-        		if( !ul_flag ) {
+                const int lvl = nspc/2 + 1;
+        		while( ul_level > lvl ) {
+        			txt += "</ul>\n";
+        			--ul_level;
+        		}
+        		while( ul_level < lvl ) {
         			txt += "<ul>\n";
-        			ul_flag = true;
+        			++ul_level;
         		}
         		txt += "<li>" + line.mid(2) + "\n";
         	} else {
-        		if( ul_flag ) {
+        		while( ul_level > 0) {
         			txt += "</ul>\n";
-        			ul_flag = false;
+        			--ul_level;
         		}
 	            if( p_flag ) {
 		            txt += "<p>";
@@ -57,9 +63,9 @@ QString toHtmlText(const QString& plainText) {
         } else
         	p_flag = true;
     }
-	if( ul_flag ) {
+	while( ul_level > 0) {
 		txt += "</ul>\n";
-		ul_flag = false;
+		--ul_level;
 	}
     return txt;
 }
