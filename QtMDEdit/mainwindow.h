@@ -20,8 +20,13 @@ public:
 public slots:
     void	plainTextChanged();
 
+private slots:
+    void on_action_Source_triggered();
+    void on_action_HTML_triggered();
+
 private:
     Ui::MainWindow *ui;
+    bool	m_htmlMode = true;
     QString	m_plainText;
     QString	m_htmlText;
 };

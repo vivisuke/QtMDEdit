@@ -7,6 +7,16 @@
 0005 ◎ C 11/02 11/02 0.001│ToDo│TextEdit は編集不可（リードオンリー）に
 0006 ◎ C 11/02 11/02 0.001│ToDo│PlainTextEdit 編集時：MainWindows にシグナル発行
 0007 ◎ C 11/02 11/02 0.001│ToDo│PlainTextEdit 編集時：plainText を htmlText に変換
-0008 ● C 11/02            │ToDo│
-0009 ● C 11/02            │ToDo│
-0010 ● C 11/02            │ToDo│
+0008 ◎ C 11/02 11/02 0.001│ToDo│View/Source, HTML：表示切り替え
+0009 ◎ C 11/02 11/03 0.001│ToDo│Markdown：# ## ###... サポート
+0010 ● C 11/03            │ToDo│
+0011 ● C 11/03            │ToDo│
+0012 ● C 11/03            │ToDo│
+0013 ● C 11/03            │ToDo│
+0014 ● C 11/03            │ToDo│
+0015 ● C 11/03            │ToDo│
+0016 ● C 11/03            │ToDo│
+0017 ● C 11/03            │ToDo│
+0018 ● C 11/03            │ToDo│
+0019 ● C 11/03            │ToDo│
+0020 ● C 11/03            │ToDo│
