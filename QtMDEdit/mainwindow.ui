@@ -35,8 +35,39 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu_View">
+    <property name="title">
+     <string>&amp;View</string>
+    </property>
+    <addaction name="action_Source"/>
+    <addaction name="action_HTML"/>
+   </widget>
+   <addaction name="menu_View"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="action_Source"/>
+   <addaction name="action_HTML"/>
+  </widget>
+  <action name="action_Source">
+   <property name="text">
+    <string>&amp;Source</string>
+   </property>
+  </action>
+  <action name="action_HTML">
+   <property name="text">
+    <string>&amp;HTML</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
