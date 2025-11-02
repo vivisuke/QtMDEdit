@@ -17,6 +17,7 @@ MainWindow::~MainWindow()
 QString toHtmlText(const QString& plainText) {
     auto lst = plainText.split('\n');
     QString txt;
+    bool pflag = true;
     for(int i = 0; i != lst.size(); ++i) {
         const auto &line = lst[i];
         if( !line.isEmpty() ) {
@@ -27,9 +28,16 @@ QString toHtmlText(const QString& plainText) {
         		while( i < line.size() && line[i] == ' ' ) ++i;
                 QString t = line.mid(i);
                 txt += QString("<h%1>").arg(h) + t + QString("</h%1>\n").arg(h);
-        	} else
-	            txt += "<p>" + line + "\n";
-        }
+	        	pflag = true;
+        	} else {
+	            if( pflag ) {
+		            txt += "<p>";
+		            pflag = false;
+	            }
+	            txt += line + "\n";
+        	}
+        } else
+        	pflag = true;
     }
     return txt;
 }
