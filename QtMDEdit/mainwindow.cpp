@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -17,28 +17,50 @@ MainWindow::~MainWindow()
 QString toHtmlText(const QString& plainText) {
     auto lst = plainText.split('\n');
     QString txt;
-    bool pflag = true;
+    bool p_flag = true;
+    bool ul_flag = false;		//	<ul> ブロック内
     for(int i = 0; i != lst.size(); ++i) {
-        const auto &line = lst[i];
+        auto line = lst[i];
+        int nspc = 0;
+      	while( nspc < line.size() && line[nspc] == ' ' ) ++nspc;
+      	if( nspc != 0 ) line = line.mid(nspc);
         if( !line.isEmpty() ) {
         	if( line[0] == '#' ) {
+        		if( ul_flag ) {
+        			txt += "</ul>\n";
+        			ul_flag = false;
+        		}
         		int i = 1;
         		while( i < line.size() && line[i] == '#' ) ++i;
         		int h = i;
         		while( i < line.size() && line[i] == ' ' ) ++i;
                 QString t = line.mid(i);
                 txt += QString("<h%1>").arg(h) + t + QString("</h%1>\n").arg(h);
-	        	pflag = true;
+	        	p_flag = true;
+        	} else if( line.left(2) == "- " ) {
+        		if( !ul_flag ) {
+        			txt += "<ul>\n";
+        			ul_flag = true;
+        		}
+        		txt += "<li>" + line.mid(2) + "\n";
         	} else {
-	            if( pflag ) {
+        		if( ul_flag ) {
+        			txt += "</ul>\n";
+        			ul_flag = false;
+        		}
+	            if( p_flag ) {
 		            txt += "<p>";
-		            pflag = false;
+		            p_flag = false;
 	            }
 	            txt += line + "\n";
         	}
         } else
-        	pflag = true;
+        	p_flag = true;
     }
+	if( ul_flag ) {
+		txt += "</ul>\n";
+		ul_flag = false;
+	}
     return txt;
 }
 
