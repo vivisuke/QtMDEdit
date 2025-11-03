@@ -22,6 +22,9 @@ const QString& MarkdownToHtmlConvertor::convert() {
 			do_list(line);
 		} else if( line.startsWith("1. ") ) {
 			do_olist(line);
+		} else if( line == "---" ) {
+			m_htmlText += "<hr>\n";
+			m_isParagraphOpen = true;
 		} else {
 			do_paragraph(line);
 		}
