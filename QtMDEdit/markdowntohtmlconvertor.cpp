@@ -1,10 +1,13 @@
-#include <QList>
+﻿#include <QList>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
 #include "markdowntohtmlconvertor.h"
 
 const QString& MarkdownToHtmlConvertor::convert() {
 	m_htmlText.clear();
 	m_isParagraphOpen = true;
-	m_currentUlLevel = 0;
+	m_curUlLevel = 0;
+	m_curOlLevel = 0;
 	auto lst = m_markdownText.split('\n');
 	for(int i = 0; i != lst.size(); ++i) {
 		auto line = lst[i];
@@ -17,27 +20,62 @@ const QString& MarkdownToHtmlConvertor::convert() {
 			do_heading(line);
 		} else if( line.startsWith("- ") ) {
 			do_list(line);
+		} else if( line.startsWith("1. ") ) {
+			do_olist(line);
 		} else {
 			do_paragraph(line);
 		}
 	}
 	close_ul();
+	close_ol();
 	return m_htmlText;
 }
 void MarkdownToHtmlConvertor::open_ul(int lvl) {
-	while( m_currentUlLevel < lvl ) {
+	while( m_curUlLevel < lvl ) {
 		m_htmlText += "<ul>\n";
-		++m_currentUlLevel;
+		++m_curUlLevel;
 	}
 }
 void MarkdownToHtmlConvertor::close_ul(int lvl) {
-	while( m_currentUlLevel > lvl) {
+	while( m_curUlLevel > lvl) {
 		m_htmlText += "</ul>\n";
-		--m_currentUlLevel;
+		--m_curUlLevel;
 	}
+}
+void MarkdownToHtmlConvertor::open_ol(int lvl) {
+	while( m_curOlLevel < lvl ) {
+		m_htmlText += "<ol>\n";
+		++m_curOlLevel;
+	}
+}
+void MarkdownToHtmlConvertor::close_ol(int lvl) {
+	while( m_curOlLevel > lvl) {
+		m_htmlText += "</ol>\n";
+		--m_curOlLevel;
+	}
+}
+QString MarkdownToHtmlConvertor::parceInline(const QString& line) {
+	QString result = line;
+
+	//QRegularExpression italicRe("\\*(.+?)\\*");
+	//result.replace(italicRe, "<em>\\1</em>");
+
+    static QRegularExpression re(R"((?<![\\])\*)");  // 直前が \ でない * をマッチ
+	QRegularExpressionMatch match = re.match(result);
+	while (match.hasMatch()) {
+        int s = match.capturedStart();  // 最初のマッチ位置 
+		match = re.match(result, s+1);
+		if( !match.hasMatch() ) break;
+        int e = match.capturedStart();  // ２番目のマッチ位置 
+		result = result.left(s) + "<i>" + result.mid(s+1, e - s - 1) + "</i>" + result.mid(e+1);
+	}
+    result.replace("\\*", "*");
+
+	return result;
 }
 void MarkdownToHtmlConvertor::do_heading(const QString& line) {
 	close_ul();
+	close_ol();
 	int i = 1;
 	while( i < line.size() && line[i] == '#' ) ++i;
 	int h = i;
@@ -52,11 +90,18 @@ void MarkdownToHtmlConvertor::do_list(const QString& line) {
     open_ul(lvl);
 	m_htmlText += "<li>" + line.mid(2) + "\n";
 }
+void MarkdownToHtmlConvertor::do_olist(const QString& line) {
+    const int lvl = m_nSpace/2 + 1;
+    close_ol(lvl);
+    open_ol(lvl);
+	m_htmlText += "<li>" + line.mid(2) + "\n";
+}
 void MarkdownToHtmlConvertor::do_paragraph(const QString& line) {
 	close_ul();
+	close_ol();
 	if( m_isParagraphOpen ) {
 		m_htmlText += "<p>";
 		m_isParagraphOpen = false;
 	}
-	m_htmlText += line + "\n";
+	m_htmlText += parceInline(line) + "\n";
 }

@@ -17,16 +17,22 @@ public:
 private:
     void	do_heading(const QString&);
     void	do_list(const QString&);
+    void	do_olist(const QString&);
     void	do_paragraph(const QString&);
+
+    QString	parceInline(const QString&);
 
     void	open_ul(int lvl);
     void	close_ul(int lvl=0);
+    void	open_ol(int lvl);
+    void	close_ol(int lvl=0);
 
 private:
 	QString		m_markdownText;
 	QString		m_htmlText;
 	bool		m_isParagraphOpen = true;
-	int			m_currentUlLevel = 0;
+	int			m_curUlLevel = 0;
+	int			m_curOlLevel = 0;
 	int			m_nSpace = 0;
 };
 
