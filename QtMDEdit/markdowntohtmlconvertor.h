@@ -19,6 +19,8 @@ private:
     void	do_list(const QString&);
     void	do_paragraph(const QString&);
 
+    void	close_ul(int lvl=0);
+
 private:
 	QString		m_markdownText;
 	QString		m_htmlText;

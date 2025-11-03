@@ -21,17 +21,17 @@ const QString& MarkdownToHtmlConvertor::convert() {
 			do_paragraph(line);
 		}
 	}
-	while( m_currentUlLevel > 0) {
-		m_htmlText += "</ul>\n";
-		--m_currentUlLevel;
-	}
+	close_ul();
 	return m_htmlText;
 }
-void MarkdownToHtmlConvertor::do_heading(const QString& line) {
-	while( m_currentUlLevel > 0) {
+void MarkdownToHtmlConvertor::close_ul(int lvl) {
+	while( m_currentUlLevel > lvl) {
 		m_htmlText += "</ul>\n";
 		--m_currentUlLevel;
 	}
+}
+void MarkdownToHtmlConvertor::do_heading(const QString& line) {
+	close_ul();
 	int i = 1;
 	while( i < line.size() && line[i] == '#' ) ++i;
 	int h = i;
@@ -42,10 +42,7 @@ void MarkdownToHtmlConvertor::do_heading(const QString& line) {
 }
 void MarkdownToHtmlConvertor::do_list(const QString& line) {
     const int lvl = m_nSpace/2 + 1;
-	while( m_currentUlLevel > lvl ) {
-		m_htmlText += "</ul>\n";
-		--m_currentUlLevel;
-	}
+    close_ul(lvl);
 	while( m_currentUlLevel < lvl ) {
 		m_htmlText += "<ul>\n";
 		++m_currentUlLevel;
@@ -53,10 +50,7 @@ void MarkdownToHtmlConvertor::do_list(const QString& line) {
 	m_htmlText += "<li>" + line.mid(2) + "\n";
 }
 void MarkdownToHtmlConvertor::do_paragraph(const QString& line) {
-	while( m_currentUlLevel > 0) {
-		m_htmlText += "</ul>\n";
-		--m_currentUlLevel;
-	}
+	close_ul();
 	if( m_isParagraphOpen ) {
 		m_htmlText += "<p>";
 		m_isParagraphOpen = false;
