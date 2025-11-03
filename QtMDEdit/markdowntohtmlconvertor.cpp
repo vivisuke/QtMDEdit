@@ -60,13 +60,23 @@ QString MarkdownToHtmlConvertor::parceInline(const QString& line) {
 	//QRegularExpression italicRe("\\*(.+?)\\*");
 	//result.replace(italicRe, "<em>\\1</em>");
 
-    static QRegularExpression re(R"((?<![\\])\*)");  // 直前が \ でない * をマッチ
-	QRegularExpressionMatch match = re.match(result);
+    static QRegularExpression re_star2(R"((?<![\\])\*\*)");  // 直前が \ でない ** をマッチ
+	QRegularExpressionMatch match = re_star2.match(result);
 	while (match.hasMatch()) {
-        int s = match.capturedStart();  // 最初のマッチ位置 
-		match = re.match(result, s+1);
+        int s = match.capturedStart();  // 最初のマッチ位置
+        match = re_star2.match(result, s+2);
 		if( !match.hasMatch() ) break;
         int e = match.capturedStart();  // ２番目のマッチ位置 
+		result = result.left(s) + "<b>" + result.mid(s+2, e - s - 2) + "</b>" + result.mid(e+2);
+	}
+    static QRegularExpression re_star(R"((?<![\\])\*)");  // 直前が \ でない * をマッチ
+	match = re_star.match(result);
+	while (match.hasMatch()) {
+        int s = match.capturedStart();  // 最初のマッチ位置 
+		match = re_star.match(result, s+1);
+		if( !match.hasMatch() ) break;
+        int e = match.capturedStart();  // ２番目のマッチ位置 
+        if( e == s + 1 ) break;
 		result = result.left(s) + "<i>" + result.mid(s+1, e - s - 1) + "</i>" + result.mid(e+1);
 	}
     result.replace("\\*", "*");
