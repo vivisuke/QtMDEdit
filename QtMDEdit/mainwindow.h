@@ -24,6 +24,8 @@ private slots:
     void on_action_Source_triggered();
     void on_action_HTML_triggered();
 
+    void on_actione_Xit_triggered();
+
 private:
     Ui::MainWindow *ui;
     bool	m_htmlMode = true;

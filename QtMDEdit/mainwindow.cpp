@@ -115,3 +115,9 @@ void MainWindow::on_action_HTML_triggered()
 	ui->textEdit->setHtml(m_htmlText);
 }
 
+
+void MainWindow::on_actione_Xit_triggered()
+{
+    qApp->quit();
+}
+
