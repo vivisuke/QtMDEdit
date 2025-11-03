@@ -24,6 +24,12 @@ const QString& MarkdownToHtmlConvertor::convert() {
 	close_ul();
 	return m_htmlText;
 }
+void MarkdownToHtmlConvertor::open_ul(int lvl) {
+	while( m_currentUlLevel < lvl ) {
+		m_htmlText += "<ul>\n";
+		++m_currentUlLevel;
+	}
+}
 void MarkdownToHtmlConvertor::close_ul(int lvl) {
 	while( m_currentUlLevel > lvl) {
 		m_htmlText += "</ul>\n";
@@ -43,10 +49,7 @@ void MarkdownToHtmlConvertor::do_heading(const QString& line) {
 void MarkdownToHtmlConvertor::do_list(const QString& line) {
     const int lvl = m_nSpace/2 + 1;
     close_ul(lvl);
-	while( m_currentUlLevel < lvl ) {
-		m_htmlText += "<ul>\n";
-		++m_currentUlLevel;
-	}
+    open_ul(lvl);
 	m_htmlText += "<li>" + line.mid(2) + "\n";
 }
 void MarkdownToHtmlConvertor::do_paragraph(const QString& line) {

@@ -19,6 +19,7 @@ private:
     void	do_list(const QString&);
     void	do_paragraph(const QString&);
 
+    void	open_ul(int lvl);
     void	close_ul(int lvl=0);
 
 private:
