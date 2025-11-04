@@ -1,4 +1,5 @@
-﻿#include "mainwindow.h"
+﻿#include <QClipboard>
+#include "mainwindow.h"
 #include "markdowntohtmlconvertor.h"
 #include "./ui_mainwindow.h"
 
@@ -33,6 +34,7 @@ MainWindow::~MainWindow()
 	delete ui;
 }
 
+#if 0
 QString toHtmlText(const QString& plainText) {
 	auto lst = plainText.split('\n');
 	QString txt;
@@ -88,13 +90,15 @@ QString toHtmlText(const QString& plainText) {
 	}
 	return txt;
 }
+#endif
 
 void MainWindow::plainTextChanged() {
 	qDebug() << "plainTextChanged()\n";
 	m_plainText = ui->plainTextEdit->toPlainText();
 	//m_htmlText = toHtmlText(m_plainText);
-	MarkdownToHtmlConvertor mhc(m_plainText);
-	m_htmlText = mhc.convert();
+	//MarkdownToHtmlConvertor mhc(m_plainText);
+	m_htmlComvertor.setMarkdownText(m_plainText);
+	m_htmlText = m_htmlComvertor.convert();
 	if( m_htmlMode )
 		ui->textEdit->setHtml(m_htmlText);
 	else
@@ -119,5 +123,15 @@ void MainWindow::on_action_HTML_triggered()
 void MainWindow::on_actione_Xit_triggered()
 {
     qApp->quit();
+}
+
+
+void MainWindow::on_actionCopy_HTML_Source_triggered()
+{
+    QString src = ui->textEdit->toPlainText();
+    //QString src = ui->plainTextEdit->toPlainText();
+    QClipboard *clipboard = QApplication::clipboard();
+    clipboard->setText(src);
+
 }
 

@@ -52,7 +52,14 @@
     </property>
     <addaction name="actione_Xit"/>
    </widget>
+   <widget class="QMenu" name="menu_Edit">
+    <property name="title">
+     <string>&amp;Edit</string>
+    </property>
+    <addaction name="actionCopy_HTML_Source"/>
+   </widget>
    <addaction name="menu_File"/>
+   <addaction name="menu_Edit"/>
    <addaction name="menu_View"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -91,6 +98,11 @@
   <action name="actione_Xit">
    <property name="text">
     <string>e&amp;Xit</string>
+   </property>
+  </action>
+  <action name="actionCopy_HTML_Source">
+   <property name="text">
+    <string>Copy HTML &amp;Source</string>
    </property>
   </action>
  </widget>

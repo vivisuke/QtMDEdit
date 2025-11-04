@@ -6,10 +6,12 @@
 class MarkdownToHtmlConvertor
 {
 public:
-	explicit MarkdownToHtmlConvertor(const QString& markdownText)
+	explicit MarkdownToHtmlConvertor(const QString& markdownText = "")
         : m_markdownText(markdownText)
     {}
 
+    void	setMarkdownText(const QString& txt) { m_markdownText = txt; }
+	const QString&	getMarkdownText() const { return m_markdownText; }
     const QString&	convert();
 
 private:

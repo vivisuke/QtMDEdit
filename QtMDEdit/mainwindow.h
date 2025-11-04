@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "markdowntohtmlconvertor.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -26,10 +27,13 @@ private slots:
 
     void on_actione_Xit_triggered();
 
+    void on_actionCopy_HTML_Source_triggered();
+
 private:
     Ui::MainWindow *ui;
     bool	m_htmlMode = true;
     QString	m_plainText;
     QString	m_htmlText;
+    MarkdownToHtmlConvertor	m_htmlComvertor;
 };
 #endif // MAINWINDOW_H
