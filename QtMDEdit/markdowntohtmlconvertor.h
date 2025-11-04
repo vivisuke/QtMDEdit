@@ -8,8 +8,6 @@ class MarkdownToHtmlConvertor
 public:
 	explicit MarkdownToHtmlConvertor(const QString& markdownText)
         : m_markdownText(markdownText)
-        //, m_isParagraphOpen(false)
-        //, m_currentUlLevel(0)
     {}
 
     const QString&	convert();
@@ -31,6 +29,8 @@ private:
 	QString		m_markdownText;
 	QString		m_htmlText;
 	bool		m_isParagraphOpen = true;
+	bool		m_isInsideUl = false;
+	bool		m_isInsideOl = false;
 	int			m_curUlLevel = 0;
 	int			m_curOlLevel = 0;
 	int			m_nSpace = 0;
