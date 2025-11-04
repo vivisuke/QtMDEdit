@@ -84,6 +84,7 @@ QString MarkdownToHtmlConvertor::parceInline(const QString& line) {
 	}
     result.replace("\\*", "*");
     result.replace("\\_", "_");
+    //##result.replace("--", "-");		//	この変換は拡張仕様？
 
 	return result;
 }
