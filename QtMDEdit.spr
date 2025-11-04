@@ -22,18 +22,18 @@
 0020 ◎ C 11/03 11/03 0.001│ToDo│convert()：必要なだけ </ul> 出力処理を関数化
 0021 ◎ C 11/03 11/03 0.001│ToDo│open_ul() も関数化
 0022 ◎ C 11/03 11/04 0.001│ToDo│ボールド対応
-0023 ● C 11/03            │ToDo│アンダーライン対応
+0023 ◯ C 11/03 11/05      │ToDo│アンダーライン対応
 0024 ● C 11/04            │ToDo│セントラルウィジェットを QTabWidget に変更
 0025 ● C 11/04            │ToDo│ひとつのドキュメントを管理する QWidget 派生クラス追加
-0026 ◯ C 11/04            │ToDo│-- 対応
+0026 ◯ C 11/04 11/05      │ToDo│-- 対応
 0027 ◎ C 11/04 11/05 0.001│ToDo│イタリック、ボールド：* だけでなく _ にも対応
 0028 ◎ C 11/04 11/05 0.001│問題│箇条書き中に連番があると出力が不正になる
 0029 ◎ C 11/05 11/05 0.001│ToDo│Edit > Copy HTML Source メニュー
 0030 ◎ C 11/05 11/05 0.001│ToDo│MarkdownToHtmlConvertor mhc; を mainwindow のメンバ変数に
 0031 ◎ C 11/05 11/05 0.001│ToDo│MarkdownToHtmlConvertor：setMarkdownText() 追加 
-0032 ● C 11/05            │ToDo│
-0033 ● C 11/05            │ToDo│
-0034 ● C 11/05            │ToDo│
+0032 ◎ C 11/05 11/05 0.001│ToDo│Edit > Copy HTML Source 実行時、ステータスバーにメッセージ表示
+0033 ● C 11/05            │ToDo│QPlainTextEdit：表示フォントサイズ増減可能に？
+0034 ◎ C 11/05 11/05 0.001│ToDo│Edit > Copy HTML Source：C-S-C ショートカット表示
 0035 ● C 11/05            │ToDo│
 0036 ● C 11/05            │ToDo│
 0037 ● C 11/05            │ToDo│

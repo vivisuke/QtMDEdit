@@ -104,6 +104,9 @@
    <property name="text">
     <string>Copy HTML &amp;Source</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+C</string>
+   </property>
   </action>
  </widget>
  <resources/>

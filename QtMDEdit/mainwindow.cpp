@@ -133,6 +133,6 @@ void MainWindow::on_actionCopy_HTML_Source_triggered()
     //QString src = ui->plainTextEdit->toPlainText();
     QClipboard *clipboard = QApplication::clipboard();
     clipboard->setText(src);
-
+	statusBar()->showMessage("HTML source text is copyed to clipboard.", 3000);
 }
 
