@@ -128,7 +128,8 @@ void MainWindow::on_actione_Xit_triggered()
 
 void MainWindow::on_actionCopy_HTML_Source_triggered()
 {
-    QString src = ui->textEdit->toPlainText();
+    QString src = m_htmlComvertor.getHtmlText();
+    //QString src = ui->textEdit->toPlainText();
     //QString src = ui->plainTextEdit->toPlainText();
     QClipboard *clipboard = QApplication::clipboard();
     clipboard->setText(src);

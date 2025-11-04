@@ -12,6 +12,7 @@ public:
 
     void	setMarkdownText(const QString& txt) { m_markdownText = txt; }
 	const QString&	getMarkdownText() const { return m_markdownText; }
+	const QString&	getHtmlText() const { return m_htmlText; }
     const QString&	convert();
 
 private:

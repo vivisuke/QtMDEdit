@@ -28,7 +28,7 @@
 0026 ● C 11/04            │ToDo│-- 対応
 0027 ◎ C 11/04 11/05 0.001│ToDo│イタリック、ボールド：* だけでなく _ にも対応
 0028 ◎ C 11/04 11/05 0.001│問題│箇条書き中に連番があると出力が不正になる
-0029 ● C 11/05            │ToDo│Edit > Copy HTML Source メニュー
+0029 ◎ C 11/05 11/05 0.001│ToDo│Edit > Copy HTML Source メニュー
 0030 ◎ C 11/05 11/05 0.001│ToDo│MarkdownToHtmlConvertor mhc; を mainwindow のメンバ変数に
 0031 ◎ C 11/05 11/05 0.001│ToDo│MarkdownToHtmlConvertor：setMarkdownText() 追加 
 0032 ● C 11/05            │ToDo│
